@@ -1,0 +1,9 @@
+clients:
+  elasticsearch:
+    url: "locahost"
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  elasticsearch:
+    connection-timeout: 6000
+    socket-timeout: 6000
