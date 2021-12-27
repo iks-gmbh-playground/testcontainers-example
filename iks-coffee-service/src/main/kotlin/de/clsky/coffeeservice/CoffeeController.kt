@@ -11,6 +11,9 @@ class CoffeeController(val coffeeESRepository: CoffeeRepository) {
 
     @GetMapping("/users/{userId}/favorite-coffee")
     fun getFavoriteCoffee(@PathVariable("userId") userId: String): ResponseEntity<Coffee> {
-        return ResponseEntity.ok(coffeeESRepository.findCoffeeByUserId(userId, Pageable.unpaged()).first())
+        return when(val coffee = coffeeESRepository.findCoffeeByUserId(userId, Pageable.unpaged()).firstOrNull()) {
+            null -> ResponseEntity.notFound().build()
+            else -> ResponseEntity.ok(coffee)
+        }
     }
 }

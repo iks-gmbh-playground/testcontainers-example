@@ -1,6 +1,7 @@
 package de.clsky.coffeeservice
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
@@ -20,9 +21,14 @@ class CoffeeServiceApplicationTest {
     @Autowired
     lateinit var coffeeRepository: CoffeeRepository
 
+    @BeforeEach
+    fun resetES() {
+        coffeeRepository.deleteAll()
+    }
+
     @Test
     fun grabMyCoffeeTest() {
-        var coffee = Coffee("x1", "Bester Kaffee", 0.5)
+        val coffee = Coffee("x1", "Bester Kaffee", 0.5)
         coffeeRepository.save(coffee)
         val userId = "x1"
         mockMvc.get("/users/${userId}/favorite-coffee").andExpect {
@@ -31,6 +37,19 @@ class CoffeeServiceApplicationTest {
             }
             content {
                 json(jacksonObjectMapper().writeValueAsString(coffee))
+            }
+        }
+
+    }
+
+    @Test
+    fun userNotFound() {
+        val coffee = Coffee("x1", "Bester Kaffee", 0.5)
+        coffeeRepository.save(coffee)
+        val userId = "a4"
+        mockMvc.get("/users/${userId}/favorite-coffee").andExpect {
+            status {
+                isNotFound()
             }
         }
 
