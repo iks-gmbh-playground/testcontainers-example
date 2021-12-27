@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: ${DATABASE_PASSWORD:}
+    username: ${DATABASE_USERNAME:}
+    url: ${DATABASE_JDBC_URL:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+#logging:
+#  level:
+#    root: info
