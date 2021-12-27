@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class CoffeeController(val coffeeESRepository: CoffeeESRepository) {
+class CoffeeController(val coffeeESRepository: CoffeeRepository) {
 
     @GetMapping("/users/{userId}/favorite-coffee")
     fun getFavoriteCoffee(@PathVariable("userId") userId: String): ResponseEntity<Coffee> {
