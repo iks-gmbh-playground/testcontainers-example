@@ -1,15 +1,15 @@
 package de.clsky.orderservice;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
+@Table(name = "orders")
 @Data
 @NoArgsConstructor
-public class MyOrder {
+public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

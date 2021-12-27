@@ -13,7 +13,7 @@ public class OrderRestController {
     private final OrderRepository orderRepository;
 
     @PostMapping(path = "/orders", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<MyOrder> placeOrder(@RequestBody MyOrder order) {
+    public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
 
         if ("not_valid".equals(order.getItemName())) {
             return ResponseEntity.badRequest().build();

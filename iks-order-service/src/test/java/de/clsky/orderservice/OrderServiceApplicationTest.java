@@ -12,7 +12,7 @@ public class OrderServiceApplicationTest extends IntegrationsTest {
 
     @Test
     void funktioniertSoweit() throws Exception {
-        var myOrder = new MyOrder();
+        var myOrder = new Order();
         myOrder.setAmount(1L);
         myOrder.setItemName("Cool");
         mockMvc.perform(MockMvcRequestBuilders.post("/orders")
@@ -29,7 +29,7 @@ public class OrderServiceApplicationTest extends IntegrationsTest {
 
     @Test
     void derNicht() throws Exception {
-        var myOrder = new MyOrder();
+        var myOrder = new Order();
         myOrder.setAmount(1L);
         myOrder.setItemName("not_valid");
         mockMvc.perform(MockMvcRequestBuilders.post("/orders")
