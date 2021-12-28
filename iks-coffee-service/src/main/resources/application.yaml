@@ -1,4 +1,6 @@
 clients:
+  orderservice:
+    url: ${ORDERSERVICE_URL:localhost}
   redis:
     url: ${REDIS_URL:localhost}
     port: ${REDIS_PORT:6379}

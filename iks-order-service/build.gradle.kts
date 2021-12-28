@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm")
     kotlin("plugin.spring")
     kotlin("plugin.jpa")
+    id("com.google.cloud.tools.jib")
 }
 
 java.sourceCompatibility = JavaVersion.VERSION_11

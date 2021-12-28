@@ -24,9 +24,15 @@ class CoffeeServiceApplicationTest {
     @Autowired
     lateinit var coffeeRedisRepository: CoffeRedisRepository
 
+    @Autowired
+    lateinit var orderServiceProperties: OrderServiceProperties
+
     @BeforeEach
-    fun resetES() {
+    fun prepareTest() {
         coffeeRedisRepository.deleteAll()
+        withOrderServiceRunning {
+            orderServiceProperties.url = "http://${it.host}:${it.firstMappedPort}"
+        }
     }
 
     @Test

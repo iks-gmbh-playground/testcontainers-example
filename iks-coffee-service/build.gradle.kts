@@ -47,6 +47,7 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks.withType<Test> {
+    dependsOn(":iks-order-service:jibDockerBuild")
     useJUnitPlatform()
 }
 

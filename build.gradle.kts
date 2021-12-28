@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.jpa") version "1.6.10" apply false
     kotlin("jvm") version "1.6.10" apply false
     kotlin("plugin.serialization") version "1.6.10" apply false
+    id("com.google.cloud.tools.jib") version "3.1.4" apply false
 }
 
 tasks.register("install") {
@@ -17,7 +18,6 @@ allprojects {
 
     repositories {
         mavenCentral()
-        jcenter()
     }
 
     ext.apply {
