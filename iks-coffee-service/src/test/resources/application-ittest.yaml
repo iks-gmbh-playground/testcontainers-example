@@ -1,6 +1,3 @@
-clients:
-  elasticsearch:
-    url: "locahost"
 spring:
   main:
     allow-bean-definition-overriding: true

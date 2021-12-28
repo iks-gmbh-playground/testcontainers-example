@@ -1,6 +1,8 @@
 package de.clsky.coffeeservice
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import de.clsky.coffeeservice.redis.CoffeRedisRepository
+import de.clsky.coffeeservice.redis.Coffee
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,40 +20,41 @@ class CoffeeServiceApplicationTest {
     @Autowired
     lateinit var mockMvc: MockMvc
 
+
     @Autowired
-    lateinit var coffeeRepository: CoffeeRepository
+    lateinit var coffeeRedisRepository: CoffeRedisRepository
 
     @BeforeEach
     fun resetES() {
-        coffeeRepository.deleteAll()
+        coffeeRedisRepository.deleteAll()
     }
 
     @Test
-    fun grabMyCoffeeTest() {
-        val coffee = Coffee("x1", "Bester Kaffee", 0.5)
-        coffeeRepository.save(coffee)
-        val userId = "x1"
-        mockMvc.get("/users/${userId}/favorite-coffee").andExpect {
-            status {
-                is2xxSuccessful()
-            }
-            content {
-                json(jacksonObjectMapper().writeValueAsString(coffee))
-            }
-        }
+    fun `Grab my favorite coffee from redis`() {
+        val coffee = Coffee("redis1", "Bester Kaffee", 0.5)
+        coffeeRedisRepository.save(coffee)
+        val userId = "redis1"
 
+        mockMvc.get("/users/${userId}/favorite-coffee").andExpect {
+                status {
+                    is2xxSuccessful()
+                }
+                content {
+                    json(jacksonObjectMapper().writeValueAsString(coffee))
+                }
+            }
     }
 
     @Test
-    fun userNotFound() {
-        val coffee = Coffee("x1", "Bester Kaffee", 0.5)
-        coffeeRepository.save(coffee)
-        val userId = "a4"
+    fun `No one knows my favorite Coffee`() {
+        val coffee = Coffee("redis2", "Noch Besterer Kaffee", 0.5)
+        coffeeRedisRepository.save(coffee)
+        val userId = "redis1"
         mockMvc.get("/users/${userId}/favorite-coffee").andExpect {
-            status {
-                isNotFound()
+                status {
+                    isNotFound()
+                }
             }
-        }
-
     }
+
 }

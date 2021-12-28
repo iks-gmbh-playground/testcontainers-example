@@ -1,0 +1,4 @@
+clients:
+  redis:
+    url: ${REDIS_URL:localhost}
+    port: ${REDIS_PORT:6379}
