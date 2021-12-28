@@ -1,4 +1,4 @@
-package de.clsky.coffeeservice
+package de.iks.coffeeservice
 
 import org.springframework.context.annotation.*
 import org.springframework.data.redis.connection.RedisConnectionFactory

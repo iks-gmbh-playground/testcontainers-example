@@ -1,4 +1,4 @@
-package de.clsky.coffeeservice.redis
+package de.iks.coffeeservice.redis
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean

@@ -1,4 +1,4 @@
-package de.clsky.orderservice;
+package de.iks.orderservice;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;

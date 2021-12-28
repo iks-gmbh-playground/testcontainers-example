@@ -1,4 +1,4 @@
-package de.clsky.orderservice.testcontainers;
+package de.iks.orderservice.testcontainers;
 
 import org.testcontainers.containers.PostgreSQLContainer;
 

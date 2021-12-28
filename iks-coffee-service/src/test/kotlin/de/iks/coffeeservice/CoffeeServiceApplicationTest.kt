@@ -1,8 +1,8 @@
-package de.clsky.coffeeservice
+package de.iks.coffeeservice
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import de.clsky.coffeeservice.redis.CoffeRedisRepository
-import de.clsky.coffeeservice.redis.Coffee
+import de.iks.coffeeservice.redis.CoffeRedisRepository
+import de.iks.coffeeservice.redis.Coffee
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired

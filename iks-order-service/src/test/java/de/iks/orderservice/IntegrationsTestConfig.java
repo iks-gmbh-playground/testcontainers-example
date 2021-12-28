@@ -1,6 +1,6 @@
-package de.clsky.orderservice;
+package de.iks.orderservice;
 
-import de.clsky.orderservice.testcontainers.PostgresDB;
+import de.iks.orderservice.testcontainers.PostgresDB;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;

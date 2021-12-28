@@ -1,4 +1,4 @@
-package de.clsky.coffeeservice
+package de.iks.coffeeservice
 
 data class Order(
     private var id: Long? = null,

@@ -1,4 +1,4 @@
-package de.clsky.coffeeservice.redis
+package de.iks.coffeeservice.redis
 
 import org.springframework.data.annotation.Id
 import org.springframework.data.redis.core.RedisHash

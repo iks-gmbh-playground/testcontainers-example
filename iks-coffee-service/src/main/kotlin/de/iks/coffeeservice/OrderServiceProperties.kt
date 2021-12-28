@@ -1,4 +1,4 @@
-package de.clsky.coffeeservice
+package de.iks.coffeeservice
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 
