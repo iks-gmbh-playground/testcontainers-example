@@ -22,11 +22,13 @@ Schauen wir uns doch einmal ein kleines Beispiel an:
 Ich möchte gerne meinen Lieblingskaffee bei meinem CoffeeService bestellen. Dazu platziere ich dort einfach eine Bestellung.
 Der CoffeeService fragt nun seine Redis, welcher Kaffee mein Lieblingskaffee ist, ruft die entsprechende Information ab und gibt sie weiter an den OrderService. Dieser speichert die Order in einer Postgres und bestätigt den Erhalt der Order. Mehr braucht es dann auch nicht mehr und ich kann nun meinen Lieblingskaffee heiss und lecker genießen.
 
-Die Services sind mittels Spring Boot geschrieben und einsatzbereit und warten bereits sehnsüchtig darauf, von uns getestet zu werden.
+Die Services sind bereits mittels Spring Boot geschrieben und einsatzbereit und warten sehnsüchtig darauf, von uns getestet zu werden.
 
 Schauen wir uns zuerst den etwas leichteren Fall an: Den OrderService. Ein erster Test ist schnell geschrieben. 
 
-Damit wir den Service jedoch integriert auch ohne Fehler testen können, benötigen wir eine Postgres-Instanz auf unserem System. Wir wollen schließlich darauf verzichten, unsere Implementierung gegen eine andere Datenbanktechnologie - wie z.B. die In-Memory-DB h2 - zu testen. Wir wollen gegen die Technologien testen, welche später auch in Produktion zum Einsatz kommen. Aber muss ich jetzt wirklich eine komplette Postgres lokal aufsetzen? Natürlich nicht. Alles was wir benötigen, ist Docker auf unserem System und Testcontainers in unseren Testdependencies. Wer sich bei Testcontainers ein wenig umschaut wird ausserdem feststellen, dass es für die gängigen Datenbanken bereits vorgefertigte Testcontainers gibt. In unserem Fall verwenden wir deshalb einfach die Postgres-API. Jetzt gilt es unsere Datenbank zu konfigurieren.
+Wir schicken einfach einen Request gültigen Request gegen das Backend und erwarten, dass wir damit auch unseren Lieblingskaffee erhalten. 
+
+Damit wir den Service jedoch integriert testen können, benötigen wir eine Postgres-Instanz auf unserem System. Wir wollen schließlich darauf verzichten, unsere Implementierung gegen eine andere Datenbanktechnologie - wie z.B. die In-Memory-DB h2 - zu testen. Wir wollen gegen die Technologien testen, welche später auch in Produktion zum Einsatz kommen. Aber muss ich jetzt wirklich eine komplette Postgres lokal aufsetzen? Natürlich nicht. Alles was wir benötigen, ist Docker auf unserem System und Testcontainers in unseren Testdependencies. Wer sich bei Testcontainers ein wenig umschaut wird ausserdem feststellen, dass es für die gängigen Datenbanken bereits vorgefertigte Testcontainers gibt. In unserem Fall verwenden wir deshalb einfach die Postgres-API. Jetzt gilt es unsere Datenbank zu konfigurieren.
 
 
 
