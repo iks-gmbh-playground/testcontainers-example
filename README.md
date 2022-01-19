@@ -9,7 +9,7 @@ Los geht's!
 
 
 ## Was ist Testcontainers
-Testcontainers ist im Grunde nix anderes als eine Docker-API-Implementierung für die JVM und ermöglicht uns, dass wir den Lifecycle der Container an unsere JVM-Laufzeit - welche die Junit-Tests ausführt - koppeln können. Dadurch müssen keine Container im Voraus gestartet sein und es bleiben auch keine Container nach der Testausführung liegen. 
+Testcontainers ist im Grunde nix anderes als eine Docker-API-Implementierung für die JVM und ermöglicht uns, den Lifecycle der Container an unsere JVM-Laufzeit - welche die Junit-Tests ausführt - koppeln zu können. Dadurch müssen keine Container im Voraus gestartet werden und es bleiben auch keine Container nach der Testausführung liegen. 
 
 Damit das funktioniert instanziert Testcontainers einen speziellen Sidecar-Container namens 'Ryuk'. 
 Ryuk managed und überwacht den Lifecycle unserer selbst gestarteten Container - ausserhalb unserer JVM. 
