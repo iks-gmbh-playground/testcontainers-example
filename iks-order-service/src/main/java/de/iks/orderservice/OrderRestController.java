@@ -14,13 +14,10 @@ public class OrderRestController {
 
     @PostMapping(path = "/orders", consumes = {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Order> placeOrder(@RequestBody Order order) {
-
         if ("not_valid".equals(order.getItemName())) {
             return ResponseEntity.badRequest().build();
         }
         orderRepository.save(order);
         return ResponseEntity.ok(order);
-
     }
 }
-

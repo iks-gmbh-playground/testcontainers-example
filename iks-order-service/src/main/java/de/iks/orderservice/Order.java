@@ -15,9 +15,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private Long amount;
-
-    @Column
     private String itemName;
+
+    private Long amount;
 }

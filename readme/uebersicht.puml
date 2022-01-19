@@ -1,0 +1,16 @@
+@startuml
+!theme sketchy-outline
+skinparam backgroundColor #ffffff
+
+actor user
+component coffeeservice
+component orderservice
+database redis
+database postgres
+user -> coffeeservice :Order my favorite Coffee
+coffeeservice --> redis :1: Get favorite coffee
+coffeeservice -> orderservice :2 Place Order
+orderservice --> postgres :3 Save Order in Database
+orderservice -> coffeeservice: 4 Return ok
+
+@enduml
