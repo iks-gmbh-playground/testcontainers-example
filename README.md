@@ -24,11 +24,42 @@ Der CoffeeService fragt nun seine Redis, welcher Kaffee mein Lieblingskaffee ist
 
 Die Services sind bereits mittels Spring Boot geschrieben und einsatzbereit und warten sehnsüchtig darauf, von uns getestet zu werden.
 
+
+### OrderService
+
 Schauen wir uns zuerst den etwas leichteren Fall an: Den OrderService. Ein erster Test ist schnell geschrieben. 
+Wir schicken einfach einen gültigen Request gegen das Backend und erwarten, dass wir a) ein OK zurückbekommen und b) unsere Order in der Datenbank zu finden ist. 
 
-Wir schicken einfach einen Request gültigen Request gegen das Backend und erwarten, dass wir damit auch unseren Lieblingskaffee erhalten. 
+Damit wir den Service jedoch wirklich integriert testen können, benötigen wir eine Postgres-Instanz auf unserem System. Wir wollen schließlich darauf verzichten, unsere Implementierung gegen eine andere Datenbanktechnologie - wie z.B. die In-Memory-DB h2 - zu testen. Aber muss ich jetzt wirklich eine komplette Postgres lokal aufsetzen? Natürlich nicht. Alles was wir benötigen, ist Docker auf unserem System und Testcontainers in unseren Testdependencies. Wer sich bei Testcontainers ein wenig umschaut wird ausserdem feststellen, dass es für die gängigen Datenbanken bereits vorgefertigte Pakete gibt. In unserem Fall verwenden wir deshalb einfach die Postgres-API. Jetzt gilt es unsere Datenbank zu konfigurieren.
 
-Damit wir den Service jedoch integriert testen können, benötigen wir eine Postgres-Instanz auf unserem System. Wir wollen schließlich darauf verzichten, unsere Implementierung gegen eine andere Datenbanktechnologie - wie z.B. die In-Memory-DB h2 - zu testen. Wir wollen gegen die Technologien testen, welche später auch in Produktion zum Einsatz kommen. Aber muss ich jetzt wirklich eine komplette Postgres lokal aufsetzen? Natürlich nicht. Alles was wir benötigen, ist Docker auf unserem System und Testcontainers in unseren Testdependencies. Wer sich bei Testcontainers ein wenig umschaut wird ausserdem feststellen, dass es für die gängigen Datenbanken bereits vorgefertigte Testcontainers gibt. In unserem Fall verwenden wir deshalb einfach die Postgres-API. Jetzt gilt es unsere Datenbank zu konfigurieren.
+- Postgresklasse erstellen
+- Image im Constructor angeben
+- Fertig
+
+Spring Boot Test-Configuration 
+- einbinden unserer Datenbank als Datasource
+- Profile(ittest)
+- Testcontainer statisch an diese Configuration packen
+  - DB wird nicht für jeden Test neu instanziert, sondern verbleibt bis zum Ende der JVM-Laufzeit -> spart Zeit.
+  - Credentials eingeben
+  - Datenbank angeben
+  - starten
+- Bean Datasource
+  - jdbc url
+  - user
+  - password
+- @Primary sagt Spring, dass diese Bean, alle anderen vom gleichen Typ überschreibt, also primär geladen werden soll
+- application-ittest.yaml -> allow-overriding... true
+
+- Test ausführen
+- Postgres wird verwendet. 
+
+- Docker Tool Window -> Ryuk startet, Postgres startet
+
+Fertig
+
+### CoffeeService
+
 
 
 

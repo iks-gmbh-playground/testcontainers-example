@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @Profile("ittest")
-public class IntegrationsTestConfig implements WebMvcConfigurer {
+public class IntegrationsTestConfig {
 
     static final PostgresDB postgres;
 

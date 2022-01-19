@@ -1,6 +1,7 @@
 @startuml
 !theme sketchy-outline
-skinparam backgroundColor #ffffff
+'skinparam backgroundColor #ffffff
+skinparam backgroundColor transparent
 
 actor user
 component coffeeservice
