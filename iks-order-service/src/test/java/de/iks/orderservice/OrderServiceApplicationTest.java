@@ -1,14 +1,41 @@
 package de.iks.orderservice;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionCallback;
+import org.springframework.transaction.support.TransactionTemplate;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class OrderServiceApplicationTest extends IntegrationsTest {
+@SpringBootTest
+@ActiveProfiles("ittest")
+@Testcontainers
+@AutoConfigureMockMvc
+class OrderServiceApplicationTest {
+
+    @Autowired
+    protected MockMvc mockMvc;
+
+    @Autowired
+    protected OrderRepository orderRepository;
+
+    @Autowired
+    protected ObjectMapper mapper;
+
+    @Autowired
+    protected PlatformTransactionManager platformTransactionManager;
 
     @Test
     void funktioniertSoweit() throws Exception {
@@ -38,7 +65,20 @@ class OrderServiceApplicationTest extends IntegrationsTest {
                 .andExpect(status().is4xxClientError());
         transactional(status -> {
             var orders = orderRepository.findAll();
-            assertThat(orders.size()).isEqualTo(0);
+            assertThat(orders.size()).isZero();
+            return null;
+        });
+    }
+
+    protected void transactional(TransactionCallback<Void> action) {
+        var transactionTemplate = new TransactionTemplate(platformTransactionManager);
+        transactionTemplate.execute(action);
+    }
+
+    @BeforeEach
+    protected void clearDB() {
+        transactional(status -> {
+            orderRepository.deleteAll();
             return null;
         });
     }
